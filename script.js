@@ -264,38 +264,7 @@ class ScrollAnimations {
 // CARD TILT EFFECT
 // ================================================
 
-class CardTilt {
-    constructor() {
-        this.cards = document.querySelectorAll('.god-card');
-        this.init();
-    }
-
-    init() {
-        this.cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => this.handleTilt(e, card));
-            card.addEventListener('mouseleave', (e) => this.resetTilt(e, card));
-        });
-    }
-
-    handleTilt(e, card) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-
-        const inner = card.querySelector('.card-inner');
-        inner.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    }
-
-    resetTilt(e, card) {
-        const inner = card.querySelector('.card-inner');
-        inner.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
-    }
-}
+// CardTilt removed - replaced by CSS flip effect
 
 // ================================================
 // CONSTELLATION CONNECTOR
@@ -495,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize effects
     new LightningEffect();
     new ScrollAnimations();
-    new CardTilt();
+    // CardTilt removed - using CSS flip effect instead
     new ConstellationEffect();
     new AmbientAudio();
     new TypingEffect();
