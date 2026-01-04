@@ -215,31 +215,37 @@ class LightningEffect {
 }
 
 // ================================================
-// SCROLL ANIMATIONS
+// INFINITE CAROUSEL
+// ================================================
+
+class InfiniteCarousel {
+    constructor() {
+        this.track = document.querySelector('.carousel-track');
+        this.cards = document.querySelectorAll('.god-card');
+        if (this.track && this.cards.length > 0) {
+            this.init();
+        }
+    }
+
+    init() {
+        // Clone all cards for infinite scroll effect
+        this.cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            this.track.appendChild(clone);
+        });
+    }
+}
+
+// ================================================
+// SCROLL ANIMATIONS (Hero Parallax)
 // ================================================
 
 class ScrollAnimations {
     constructor() {
-        this.cards = document.querySelectorAll('.god-card');
-        this.header = document.querySelector('.section-header');
         this.init();
     }
 
     init() {
-        // Intersection Observer for cards
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        this.cards.forEach(card => observer.observe(card));
-
         // Parallax effect on scroll
         window.addEventListener('scroll', () => this.handleScroll());
     }
@@ -463,9 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize effects
     new LightningEffect();
+    new InfiniteCarousel();
     new ScrollAnimations();
-    // CardTilt removed - using CSS flip effect instead
-    new ConstellationEffect();
+    // ConstellationEffect removed - using carousel instead
     new AmbientAudio();
     new TypingEffect();
     new PageLoader();

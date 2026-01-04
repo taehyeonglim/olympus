@@ -417,24 +417,48 @@ body {
     letter-spacing: 0.1em;
 }
 
-/* Gods Grid */
-.gods-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+/* Gods Carousel */
+.gods-carousel {
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.carousel-track {
+    display: flex;
     gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
+    width: max-content;
+    animation: carouselScroll 30s linear infinite;
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes carouselScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 /* God Card */
 .god-card {
     position: relative;
-    aspect-ratio: 3/4;
+    width: 320px;
+    height: 420px;
+    flex-shrink: 0;
     cursor: pointer;
     perspective: 1000px;
     text-decoration: none;
     color: inherit;
     display: block;
+    opacity: 1;
+    transform: none;
 }
 
 .card-glow {
@@ -828,32 +852,9 @@ body {
         radial-gradient(ellipse at 50% 70%, rgba(255, 182, 193, 0.4), transparent 40%);
 }
 
-/* Card entrance animation */
-.god-card {
-    opacity: 0;
-    transform: translateY(50px);
-}
-
-.god-card.visible {
-    animation: cardEntrance 0.8s ease-out forwards;
-}
-
-.god-card:nth-child(1).visible { animation-delay: 0.1s; }
-.god-card:nth-child(2).visible { animation-delay: 0.2s; }
-.god-card:nth-child(3).visible { animation-delay: 0.3s; }
-.god-card:nth-child(4).visible { animation-delay: 0.4s; }
-.god-card:nth-child(5).visible { animation-delay: 0.5s; }
-.god-card:nth-child(6).visible { animation-delay: 0.6s; }
-
-@keyframes cardEntrance {
-    0% {
-        opacity: 0;
-        transform: translateY(50px) scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+/* Card hover scale effect */
+.god-card:hover {
+    z-index: 10;
 }
 
 /* ================================================
@@ -899,11 +900,6 @@ body {
    RESPONSIVE DESIGN
    ================================================ */
 @media (max-width: 1200px) {
-    .gods-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-
     .temple-pillars {
         display: none;
     }
@@ -911,14 +907,18 @@ body {
     .title-line.olympus {
         font-size: 4rem;
     }
+
+    .god-card {
+        width: 280px;
+        height: 370px;
+    }
+
+    .carousel-track {
+        gap: 30px;
+    }
 }
 
 @media (max-width: 768px) {
-    .gods-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-    }
-
     .title-line.olympus {
         font-size: 2.5rem;
         letter-spacing: 0.15em;
@@ -945,7 +945,22 @@ body {
     }
 
     .god-card {
-        aspect-ratio: 4/3;
+        width: 260px;
+        height: 340px;
+    }
+
+    .carousel-track {
+        gap: 20px;
+        animation-duration: 25s;
+    }
+
+    .god-name {
+        font-size: 1.6rem;
+    }
+
+    .god-symbol {
+        width: 80px;
+        height: 80px;
     }
 }
 
