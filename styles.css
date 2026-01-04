@@ -415,6 +415,9 @@ body {
     aspect-ratio: 3/4;
     cursor: pointer;
     perspective: 1000px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .card-glow {
