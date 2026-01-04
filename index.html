@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Olympus Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Particle Canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- Lightning Effect -->
+    <div class="lightning"></div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="temple-pillars left">
+                <div class="pillar"></div>
+                <div class="pillar"></div>
+            </div>
+
+            <div class="title-container">
+                <div class="divine-light"></div>
+                <p class="subtitle-top">WELCOME TO</p>
+                <h1 class="main-title">
+                    <span class="title-line">THE</span>
+                    <span class="title-line olympus">OLYMPUS</span>
+                    <span class="title-line">PROJECTS</span>
+                </h1>
+                <p class="subtitle">Where Divine Ideas Become Reality</p>
+                <div class="scroll-indicator">
+                    <span>Discover the Pantheon</span>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+
+            <div class="temple-pillars right">
+                <div class="pillar"></div>
+                <div class="pillar"></div>
+            </div>
+        </div>
+
+        <div class="hero-fog"></div>
+    </header>
+
+    <!-- Gods/Projects Section -->
+    <main class="pantheon">
+        <div class="section-header">
+            <h2>THE PANTHEON</h2>
+            <p>Six divine creations, each bearing the essence of the gods</p>
+        </div>
+
+        <div class="gods-grid">
+            <!-- ATHENA -->
+            <article class="god-card" data-god="athena">
+                <div class="card-glow"></div>
+                <div class="card-inner">
+                    <div class="god-symbol">
+                        <svg viewBox="0 0 100 100" class="symbol-svg">
+                            <path d="M50 5 L60 35 L95 35 L67 55 L77 90 L50 70 L23 90 L33 55 L5 35 L40 35 Z" />
+                        </svg>
+                    </div>
+                    <h3 class="god-name">ATHENA</h3>
+                    <p class="god-domain">Goddess of Wisdom & Strategy</p>
+                    <p class="god-description">Intelligence that guides through complexity, bringing clarity to chaos.</p>
+                    <div class="god-aura"></div>
+                </div>
+            </article>
+
+            <!-- ATLAS -->
+            <article class="god-card" data-god="atlas">
+                <div class="card-glow"></div>
+                <div class="card-inner">
+                    <div class="god-symbol">
+                        <svg viewBox="0 0 100 100" class="symbol-svg">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke-width="2"/>
+                            <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke-width="2"/>
+                            <ellipse cx="50" cy="50" rx="15" ry="40" fill="none" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="god-name">ATLAS</h3>
+                    <p class="god-domain">Titan of Endurance</p>
+                    <p class="god-description">Bearing the weight of worlds, supporting infinite possibilities.</p>
+                    <div class="god-aura"></div>
+                </div>
+            </article>
+
+            <!-- HERMES -->
+            <article class="god-card" data-god="hermes">
+                <div class="card-glow"></div>
+                <div class="card-inner">
+                    <div class="god-symbol">
+                        <svg viewBox="0 0 100 100" class="symbol-svg">
+                            <path d="M50 10 L50 90" stroke-width="3"/>
+                            <path d="M35 25 Q50 35 65 25" fill="none" stroke-width="3"/>
+                            <path d="M35 35 Q50 45 65 35" fill="none" stroke-width="3"/>
+                            <circle cx="40" cy="15" r="8" fill="none" stroke-width="2"/>
+                            <circle cx="60" cy="15" r="8" fill="none" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="god-name">HERMES</h3>
+                    <p class="god-domain">Messenger of the Gods</p>
+                    <p class="god-description">Swift connections bridging realms, delivering with divine speed.</p>
+                    <div class="god-aura"></div>
+                </div>
+            </article>
+
+            <!-- VENUS -->
+            <article class="god-card" data-god="venus">
+                <div class="card-glow"></div>
+                <div class="card-inner">
+                    <div class="god-symbol">
+                        <svg viewBox="0 0 100 100" class="symbol-svg">
+                            <circle cx="50" cy="35" r="25" fill="none" stroke-width="2"/>
+                            <path d="M50 60 L50 90" stroke-width="3"/>
+                            <path d="M35 75 L65 75" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="god-name">VENUS</h3>
+                    <p class="god-domain">Goddess of Beauty & Love</p>
+                    <p class="god-description">Elegance in every interaction, captivating through design.</p>
+                    <div class="god-aura"></div>
+                </div>
+            </article>
+
+            <!-- CHIRON -->
+            <article class="god-card" data-god="chiron">
+                <div class="card-glow"></div>
+                <div class="card-inner">
+                    <div class="god-symbol">
+                        <svg viewBox="0 0 100 100" class="symbol-svg">
+                            <path d="M30 70 Q50 20 70 70" fill="none" stroke-width="2"/>
+                            <circle cx="50" cy="30" r="15" fill="none" stroke-width="2"/>
+                            <path d="M20 85 L80 85" stroke-width="3"/>
+                            <path d="M35 85 L35 70" stroke-width="2"/>
+                            <path d="M65 85 L65 70" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="god-name">CHIRON</h3>
+                    <p class="god-domain">The Wise Centaur</p>
+                    <p class="god-description">Teacher of heroes, healing through wisdom and knowledge.</p>
+                    <div class="god-aura"></div>
+                </div>
+            </article>
+
+            <!-- IRIS -->
+            <article class="god-card" data-god="iris">
+                <div class="card-glow"></div>
+                <div class="card-inner">
+                    <div class="god-symbol">
+                        <svg viewBox="0 0 100 100" class="symbol-svg">
+                            <path d="M10 80 Q50 10 90 80" fill="none" stroke-width="3"/>
+                            <path d="M20 80 Q50 20 80 80" fill="none" stroke-width="2"/>
+                            <path d="M30 80 Q50 30 70 80" fill="none" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="god-name">IRIS</h3>
+                    <p class="god-domain">Goddess of the Rainbow</p>
+                    <p class="god-description">Bridging heaven and earth, connecting with spectrum of possibilities.</p>
+                    <div class="god-aura"></div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="olympus-footer">
+        <div class="footer-columns">
+            <div class="column"></div>
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+        <div class="footer-content">
+            <p class="footer-text">Crafted with Divine Inspiration</p>
+            <p class="footer-subtitle">The Olympus Projects © MMXXVI</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
