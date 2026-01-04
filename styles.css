@@ -1,0 +1,738 @@
+/* ================================================
+   THE OLYMPUS PROJECTS - Divine Styling
+   ================================================ */
+
+/* CSS Variables */
+:root {
+    --gold: #d4af37;
+    --gold-light: #f4d160;
+    --gold-dark: #996515;
+    --marble: #f5f5f5;
+    --marble-dark: #e8e8e8;
+    --obsidian: #0a0a0f;
+    --night: #12121a;
+    --purple-divine: #4a0080;
+    --blue-divine: #1a237e;
+
+    /* God Colors */
+    --athena: #7c4dff;
+    --atlas: #ff6b35;
+    --hermes: #00bfa5;
+    --venus: #ff4081;
+    --chiron: #8d6e63;
+    --iris: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--obsidian);
+    color: var(--marble);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Particle Canvas */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Lightning Effect */
+.lightning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+}
+
+.lightning.flash {
+    animation: lightning 0.2s ease-out;
+}
+
+@keyframes lightning {
+    0%, 100% { opacity: 0; }
+    10%, 30% { opacity: 1; }
+    20%, 40% { opacity: 0; }
+    50% { opacity: 0.8; }
+}
+
+/* ================================================
+   HERO SECTION
+   ================================================ */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at center top, rgba(74, 0, 128, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at center, rgba(26, 35, 126, 0.2) 0%, transparent 60%),
+        linear-gradient(180deg, var(--obsidian) 0%, var(--night) 100%);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 30 50 50 T100 50' fill='none' stroke='%23d4af37' stroke-width='0.1' opacity='0.1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.3;
+    animation: patternMove 30s linear infinite;
+}
+
+@keyframes patternMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 200px; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1400px;
+    padding: 2rem;
+}
+
+/* Temple Pillars */
+.temple-pillars {
+    display: flex;
+    gap: 30px;
+    height: 70vh;
+    align-items: flex-end;
+}
+
+.temple-pillars.left {
+    margin-right: 60px;
+}
+
+.temple-pillars.right {
+    margin-left: 60px;
+}
+
+.pillar {
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(90deg,
+        var(--marble-dark) 0%,
+        var(--marble) 20%,
+        var(--marble) 80%,
+        var(--marble-dark) 100%
+    );
+    position: relative;
+    box-shadow:
+        inset -5px 0 15px rgba(0,0,0,0.1),
+        inset 5px 0 15px rgba(255,255,255,0.3),
+        0 0 30px rgba(212, 175, 55, 0.2);
+    animation: pillarGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pillarGlow {
+    0% { box-shadow: inset -5px 0 15px rgba(0,0,0,0.1), inset 5px 0 15px rgba(255,255,255,0.3), 0 0 30px rgba(212, 175, 55, 0.2); }
+    100% { box-shadow: inset -5px 0 15px rgba(0,0,0,0.1), inset 5px 0 15px rgba(255,255,255,0.3), 0 0 50px rgba(212, 175, 55, 0.4); }
+}
+
+.pillar::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    right: -10px;
+    height: 30px;
+    background: linear-gradient(180deg, var(--marble) 0%, var(--marble-dark) 100%);
+    clip-path: polygon(10% 100%, 0% 0%, 100% 0%, 90% 100%);
+}
+
+.pillar::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -15px;
+    right: -15px;
+    height: 20px;
+    background: var(--marble);
+    border-radius: 0 0 5px 5px;
+}
+
+/* Fluting on pillars */
+.pillar {
+    background:
+        repeating-linear-gradient(90deg,
+            var(--marble-dark) 0px,
+            var(--marble) 3px,
+            var(--marble) 7px,
+            var(--marble-dark) 10px
+        );
+}
+
+/* Title Container */
+.title-container {
+    text-align: center;
+    position: relative;
+    padding: 40px 60px;
+}
+
+.divine-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse at center,
+        rgba(212, 175, 55, 0.15) 0%,
+        rgba(212, 175, 55, 0.05) 30%,
+        transparent 70%
+    );
+    animation: divineBreath 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes divineBreath {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+.subtitle-top {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 1em;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+}
+
+.main-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.title-line {
+    display: block;
+    opacity: 0;
+    animation: titleReveal 1s ease-out forwards;
+}
+
+.title-line:nth-child(1) {
+    font-size: 2rem;
+    letter-spacing: 0.5em;
+    color: var(--marble);
+    animation-delay: 0.8s;
+}
+
+.title-line.olympus {
+    font-size: 5rem;
+    letter-spacing: 0.3em;
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.5));
+    animation-delay: 1s;
+    position: relative;
+}
+
+.title-line:nth-child(3) {
+    font-size: 2rem;
+    letter-spacing: 0.5em;
+    color: var(--marble);
+    animation-delay: 1.2s;
+}
+
+@keyframes titleReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0) drop-shadow(0 0 30px rgba(212, 175, 55, 0.5));
+    }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: rgba(245, 245, 245, 0.7);
+    margin-top: 30px;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 1.5s forwards;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 2s forwards;
+}
+
+.scroll-indicator span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.scroll-arrow {
+    width: 30px;
+    height: 30px;
+    border-right: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(45deg);
+    margin: 0 auto;
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
+    50% { transform: rotate(45deg) translate(5px, 5px); opacity: 0.5; }
+}
+
+/* Hero Fog */
+.hero-fog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(0deg, var(--night) 0%, transparent 100%);
+    z-index: 4;
+}
+
+/* ================================================
+   PANTHEON SECTION
+   ================================================ */
+.pantheon {
+    position: relative;
+    z-index: 10;
+    padding: 100px 5%;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(74, 0, 128, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(26, 35, 126, 0.1) 0%, transparent 50%),
+        var(--night);
+    min-height: 100vh;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::before,
+.section-header h2::after {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.5em;
+    color: var(--gold);
+}
+
+.section-header h2::before {
+    left: -60px;
+}
+
+.section-header h2::after {
+    right: -60px;
+}
+
+.section-header p {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(245, 245, 245, 0.6);
+    letter-spacing: 0.1em;
+}
+
+/* Gods Grid */
+.gods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* God Card */
+.god-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.card-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--gold) 0%, transparent 50%, var(--gold) 100%);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.god-card:hover .card-glow {
+    opacity: 1;
+    animation: glowRotate 3s linear infinite;
+}
+
+@keyframes glowRotate {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.god-card:hover .card-inner {
+    transform: translateY(-10px) rotateX(5deg);
+    border-color: var(--gold);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(212, 175, 55, 0.2),
+        inset 0 0 60px rgba(212, 175, 55, 0.05);
+}
+
+/* God Symbol */
+.god-symbol {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.symbol-svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+    transition: all 0.5s ease;
+}
+
+.god-card:hover .symbol-svg {
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
+    transform: scale(1.1);
+}
+
+/* God specific colors */
+.god-card[data-god="athena"] .symbol-svg { stroke: var(--athena); filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); }
+.god-card[data-god="atlas"] .symbol-svg { stroke: var(--atlas); filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.5)); }
+.god-card[data-god="hermes"] .symbol-svg { stroke: var(--hermes); filter: drop-shadow(0 0 10px rgba(0, 191, 165, 0.5)); }
+.god-card[data-god="venus"] .symbol-svg { stroke: var(--venus); filter: drop-shadow(0 0 10px rgba(255, 64, 129, 0.5)); }
+.god-card[data-god="chiron"] .symbol-svg { stroke: var(--chiron); filter: drop-shadow(0 0 10px rgba(141, 110, 99, 0.5)); }
+.god-card[data-god="iris"] .symbol-svg {
+    stroke: url(#iris-gradient);
+    filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3))
+            drop-shadow(0 0 10px rgba(72, 219, 251, 0.3));
+}
+
+.god-card[data-god="athena"]:hover .symbol-svg { filter: drop-shadow(0 0 30px rgba(124, 77, 255, 0.8)); }
+.god-card[data-god="atlas"]:hover .symbol-svg { filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.8)); }
+.god-card[data-god="hermes"]:hover .symbol-svg { filter: drop-shadow(0 0 30px rgba(0, 191, 165, 0.8)); }
+.god-card[data-god="venus"]:hover .symbol-svg { filter: drop-shadow(0 0 30px rgba(255, 64, 129, 0.8)); }
+.god-card[data-god="chiron"]:hover .symbol-svg { filter: drop-shadow(0 0 30px rgba(141, 110, 99, 0.8)); }
+.god-card[data-god="iris"]:hover .symbol-svg {
+    filter: drop-shadow(0 0 30px rgba(255, 107, 107, 0.5))
+            drop-shadow(0 0 30px rgba(72, 219, 251, 0.5))
+            drop-shadow(0 0 30px rgba(255, 159, 243, 0.5));
+}
+
+/* God Name */
+.god-name {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--marble);
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.god-card:hover .god-name {
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+.god-card[data-god="athena"]:hover .god-name { color: var(--athena); text-shadow: 0 0 30px rgba(124, 77, 255, 0.5); }
+.god-card[data-god="atlas"]:hover .god-name { color: var(--atlas); text-shadow: 0 0 30px rgba(255, 107, 53, 0.5); }
+.god-card[data-god="hermes"]:hover .god-name { color: var(--hermes); text-shadow: 0 0 30px rgba(0, 191, 165, 0.5); }
+.god-card[data-god="venus"]:hover .god-name { color: var(--venus); text-shadow: 0 0 30px rgba(255, 64, 129, 0.5); }
+.god-card[data-god="chiron"]:hover .god-name { color: var(--chiron); text-shadow: 0 0 30px rgba(141, 110, 99, 0.5); }
+.god-card[data-god="iris"]:hover .god-name {
+    background: var(--iris);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* God Domain */
+.god-domain {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* God Description */
+.god-description {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(245, 245, 245, 0.6);
+    line-height: 1.8;
+    max-width: 250px;
+}
+
+/* God Aura - Background Effect */
+.god-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.god-card:hover .god-aura {
+    opacity: 0.3;
+}
+
+.god-card[data-god="athena"] .god-aura { background: radial-gradient(ellipse at center, var(--athena), transparent 70%); }
+.god-card[data-god="atlas"] .god-aura { background: radial-gradient(ellipse at center, var(--atlas), transparent 70%); }
+.god-card[data-god="hermes"] .god-aura { background: radial-gradient(ellipse at center, var(--hermes), transparent 70%); }
+.god-card[data-god="venus"] .god-aura { background: radial-gradient(ellipse at center, var(--venus), transparent 70%); }
+.god-card[data-god="chiron"] .god-aura { background: radial-gradient(ellipse at center, var(--chiron), transparent 70%); }
+.god-card[data-god="iris"] .god-aura {
+    background:
+        radial-gradient(ellipse at 30% 30%, rgba(255, 107, 107, 0.4), transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(254, 202, 87, 0.4), transparent 50%),
+        radial-gradient(ellipse at 50% 70%, rgba(72, 219, 251, 0.4), transparent 50%);
+}
+
+/* Card entrance animation */
+.god-card {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.god-card.visible {
+    animation: cardEntrance 0.8s ease-out forwards;
+}
+
+.god-card:nth-child(1).visible { animation-delay: 0.1s; }
+.god-card:nth-child(2).visible { animation-delay: 0.2s; }
+.god-card:nth-child(3).visible { animation-delay: 0.3s; }
+.god-card:nth-child(4).visible { animation-delay: 0.4s; }
+.god-card:nth-child(5).visible { animation-delay: 0.5s; }
+.god-card:nth-child(6).visible { animation-delay: 0.6s; }
+
+@keyframes cardEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ================================================
+   FOOTER
+   ================================================ */
+.olympus-footer {
+    position: relative;
+    z-index: 10;
+    padding: 80px 5% 40px;
+    background: linear-gradient(180deg, var(--night) 0%, var(--obsidian) 100%);
+    text-align: center;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.footer-columns .column {
+    width: 20px;
+    height: 120px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+    opacity: 0.3;
+}
+
+.footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.footer-subtitle {
+    font-size: 0.9rem;
+    color: rgba(245, 245, 245, 0.4);
+    letter-spacing: 0.2em;
+}
+
+/* ================================================
+   RESPONSIVE DESIGN
+   ================================================ */
+@media (max-width: 1200px) {
+    .gods-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .temple-pillars {
+        display: none;
+    }
+
+    .title-line.olympus {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .gods-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    .title-line.olympus {
+        font-size: 2.5rem;
+        letter-spacing: 0.15em;
+    }
+
+    .title-line:nth-child(1),
+    .title-line:nth-child(3) {
+        font-size: 1.2rem;
+        letter-spacing: 0.3em;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+        letter-spacing: 0.3em;
+    }
+
+    .section-header h2::before,
+    .section-header h2::after {
+        display: none;
+    }
+
+    .god-card {
+        aspect-ratio: 4/3;
+    }
+}
+
+/* ================================================
+   CUSTOM SCROLLBAR
+   ================================================ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold-dark);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+/* ================================================
+   SELECTION
+   ================================================ */
+::selection {
+    background: var(--gold);
+    color: var(--obsidian);
+}
