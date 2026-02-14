@@ -57,6 +57,7 @@ body {
     color: var(--marble);
     overflow-x: hidden;
     line-height: 1.6;
+    opacity: 0;
 }
 
 /* Particle Canvas */
@@ -159,12 +160,6 @@ body {
 .pillar {
     width: 40px;
     height: 100%;
-    background: linear-gradient(90deg,
-        var(--marble-dark) 0%,
-        var(--marble) 20%,
-        var(--marble) 80%,
-        var(--marble-dark) 100%
-    );
     position: relative;
     box-shadow:
         inset -5px 0 15px rgba(0,0,0,0.1),
@@ -457,8 +452,6 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-    opacity: 1;
-    transform: none;
 }
 
 .card-glow {

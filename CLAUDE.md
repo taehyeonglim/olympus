@@ -6,9 +6,9 @@ The Olympus Projects is a portfolio landing page showcasing six vibe-coded produ
 
 ## File Structure
 
-- `index.html` - Main page with hero section and god cards grid
-- `styles.css` - All styling including animations, card flip, responsive design
-- `script.js` - JavaScript classes for particle system, lightning, scroll animations
+- `index.html` - Main page with hero section and infinite carousel of god cards
+- `styles.css` - All styling including animations, card flip, carousel, responsive design
+- `script.js` - JavaScript classes for particle system, lightning, carousel, scroll animations
 - `favicon.svg` - Temple pillar SVG favicon
 
 ## Key Components
@@ -34,6 +34,7 @@ Each god has a custom SVG symbol with inline colors. Important:
 - CHIRON uses `<marker>` elements with unique IDs (`chiron-arrow-front`, `chiron-arrow-back`)
 - IRIS uses `<linearGradient>` with unique IDs (`iris-rainbow-front`, `iris-rainbow-back`)
 - Unique IDs prevent conflicts between front/back card faces
+- `InfiniteCarousel` appends `-clone` suffix to IDs when duplicating cards for infinite scroll
 
 ### CSS Variables
 Dual signature colors defined in `:root`:
@@ -44,10 +45,13 @@ Dual signature colors defined in `:root`:
 ```
 
 ### JavaScript Classes
-- `ParticleSystem` - Golden floating particles on canvas
-- `LightningEffect` - Random lightning flashes
-- `ScrollAnimations` - IntersectionObserver for card entrance
-- `ConstellationEffect` - Connects particles with lines
+- `ParticleSystem` - Golden floating particles on canvas with mouse interaction
+- `LightningEffect` - Random lightning flashes (5-15s interval, 70% chance)
+- `InfiniteCarousel` - Clones god cards for seamless infinite scroll
+- `ScrollAnimations` - Parallax effect on hero section via scroll events
+- `AmbientAudio` - Hover sound effects on cards (Web Audio API)
+- `TypingEffect` - Cursor blink effect on subtitle
+- `PageLoader` - Smooth fade-in on page load
 
 ## Project Links
 
@@ -74,6 +78,6 @@ Dual signature colors defined in `:root`:
 ## Development Notes
 
 - Google Fonts: Cinzel (headings), Cormorant Garamond (body), Noto Sans KR (Korean)
-- Responsive breakpoints: 1200px (2 columns), 768px (1 column)
-- Card aspect ratio: 3/4 (desktop), 4/3 (mobile)
+- Responsive breakpoints: 1200px (smaller cards), 768px (compact cards)
+- Card dimensions: 320x420 (desktop), 280x370 (tablet), 260x340 (mobile)
 - All animations use CSS keyframes or requestAnimationFrame

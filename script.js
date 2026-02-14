@@ -231,6 +231,22 @@ class InfiniteCarousel {
         // Clone all cards for infinite scroll effect
         this.cards.forEach(card => {
             const clone = card.cloneNode(true);
+            // Fix duplicate SVG IDs by appending '-clone' suffix
+            clone.querySelectorAll('[id]').forEach(el => {
+                const oldId = el.id;
+                const newId = oldId + '-clone';
+                el.id = newId;
+                // Update url(#id) references within the same cloned card
+                clone.querySelectorAll(`[marker-end="url(#${oldId})"]`).forEach(ref => {
+                    ref.setAttribute('marker-end', `url(#${newId})`);
+                });
+                clone.querySelectorAll(`[stroke="url(#${oldId})"]`).forEach(ref => {
+                    ref.setAttribute('stroke', `url(#${newId})`);
+                });
+                clone.querySelectorAll(`[fill="url(#${oldId})"]`).forEach(ref => {
+                    ref.setAttribute('fill', `url(#${newId})`);
+                });
+            });
             this.track.appendChild(clone);
         });
     }
@@ -242,120 +258,34 @@ class InfiniteCarousel {
 
 class ScrollAnimations {
     constructor() {
+        this.ticking = false;
+        this.hero = document.querySelector('.hero');
+        this.heroContent = document.querySelector('.hero-content');
         this.init();
     }
 
     init() {
-        // Parallax effect on scroll
-        window.addEventListener('scroll', () => this.handleScroll());
+        window.addEventListener('scroll', () => {
+            if (!this.ticking) {
+                requestAnimationFrame(() => {
+                    this.handleScroll();
+                    this.ticking = false;
+                });
+                this.ticking = true;
+            }
+        });
     }
 
     handleScroll() {
         const scrollY = window.scrollY;
-        const hero = document.querySelector('.hero');
-        const heroContent = document.querySelector('.hero-content');
 
-        if (hero && heroContent) {
-            // Parallax effect for hero
-            const heroRect = hero.getBoundingClientRect();
+        if (this.hero && this.heroContent) {
+            const heroRect = this.hero.getBoundingClientRect();
             if (heroRect.bottom > 0) {
-                heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
-                heroContent.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8));
+                this.heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
+                this.heroContent.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8));
             }
         }
-    }
-}
-
-// ================================================
-// CARD TILT EFFECT
-// ================================================
-
-// CardTilt removed - replaced by CSS flip effect
-
-// ================================================
-// CONSTELLATION CONNECTOR
-// ================================================
-
-class ConstellationEffect {
-    constructor() {
-        this.cards = document.querySelectorAll('.god-card');
-        this.lines = [];
-        this.canvas = null;
-        this.ctx = null;
-        this.init();
-    }
-
-    init() {
-        // Create canvas for constellation lines
-        this.canvas = document.createElement('canvas');
-        this.canvas.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        `;
-        document.body.appendChild(this.canvas);
-        this.ctx = this.canvas.getContext('2d');
-
-        this.resize();
-        window.addEventListener('resize', () => this.resize());
-
-        this.animate();
-    }
-
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-    }
-
-    getCardCenters() {
-        const centers = [];
-        this.cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                centers.push({
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2,
-                    visible: card.classList.contains('visible')
-                });
-            }
-        });
-        return centers;
-    }
-
-    drawLines() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        const centers = this.getCardCenters();
-        if (centers.length < 2) return;
-
-        // Draw constellation lines between adjacent cards
-        this.ctx.strokeStyle = 'rgba(212, 175, 55, 0.1)';
-        this.ctx.lineWidth = 1;
-
-        for (let i = 0; i < centers.length - 1; i++) {
-            if (centers[i].visible && centers[i + 1] && centers[i + 1].visible) {
-                const dist = Math.sqrt(
-                    Math.pow(centers[i + 1].x - centers[i].x, 2) +
-                    Math.pow(centers[i + 1].y - centers[i].y, 2)
-                );
-
-                if (dist < 500) {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(centers[i].x, centers[i].y);
-                    this.ctx.lineTo(centers[i + 1].x, centers[i + 1].y);
-                    this.ctx.stroke();
-                }
-            }
-        }
-    }
-
-    animate() {
-        this.drawLines();
-        requestAnimationFrame(() => this.animate());
     }
 }
 
@@ -447,12 +377,16 @@ class PageLoader {
     }
 
     init() {
-        document.body.style.opacity = '0';
+        // Body starts hidden via CSS (opacity: 0), fade in on load
         document.body.style.transition = 'opacity 0.5s ease';
 
-        window.addEventListener('load', () => {
+        if (document.readyState === 'complete') {
             document.body.style.opacity = '1';
-        });
+        } else {
+            window.addEventListener('load', () => {
+                document.body.style.opacity = '1';
+            });
+        }
     }
 }
 
@@ -471,7 +405,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new LightningEffect();
     new InfiniteCarousel();
     new ScrollAnimations();
-    // ConstellationEffect removed - using carousel instead
     new AmbientAudio();
     new TypingEffect();
     new PageLoader();
